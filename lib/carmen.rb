@@ -17,7 +17,7 @@ end
 module Carmen
   class << self
     attr_accessor :default_country, :default_locale, :excluded_countries, :excluded_states,
-                  :prepended_countries
+                  :prepended_countries, :only_countries
   end
 
   self.default_country = 'US'
@@ -25,6 +25,7 @@ module Carmen
   self.excluded_countries = []
   self.excluded_states = {}
   self.prepended_countries = []
+  self.only_countries = []
 
   @data_path = File.join(File.dirname(__FILE__), '..', 'data')
 
@@ -61,6 +62,10 @@ module Carmen
 
     # Return data after filtering excluded countries and prepending prepended countries
     result = @countries[locale].reject { |c| excluded_countries.include?( c[1] ) }
+    
+    # Return data after filtering only included countries and prepending prepended countries
+    result = @countries[locale].reject { |c| !only_countries.include?( c[1] ) }
+    
     prepended_countries.map { |code| [ search_collection(result, code, 1, 0), code ] } + result
   end
 

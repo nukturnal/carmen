@@ -54,6 +54,12 @@ Countries to exclude are specified as an array of country codes:
 
   Carmen.excluded_countries = [ 'AF', 'ST', 'ZW', ... ]
 
+== Show Selected Countries Only
+
+Countries to include as specified as an array of country codes:
+
+  Carmen.only_countries = ['GH', 'US', 'NG', 'AF', ...]
+
 == Excluding States
 
 States to exclude are specified via a hash, with keys being the country's code, and values being the states to exclude from that country:
